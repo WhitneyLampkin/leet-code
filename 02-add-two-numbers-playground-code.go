@@ -9,6 +9,11 @@ type ListNode struct {
 	Next *ListNode
 }
 
+type LinkedList struct {
+	head *ListNode
+	len int
+}
+
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	fmt.Println("Inside addTwoNumbers...")
 
