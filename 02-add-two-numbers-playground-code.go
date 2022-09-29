@@ -9,61 +9,65 @@ type ListNode struct {
 	Next *ListNode
 }
 
-type LinkedList struct {
-	head *ListNode
-	len int
-}
-
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	fmt.Println("Inside addTwoNumbers...")
 
-	l1ListNode := l1
-	l2ListNode := l2
-	resultListNode := &ListNode{Val: 0, Next: nil}
-	var currentNode *ListNode
-
-	firstIteration := true
+	// Create variables to hold the current ListNodes, the result linked list and an indicator the carrying value
+	l1Node := l1
+	l2Node := l2
+	sum := 0
 	carry := 0
+	var summedNode ListNode
+	var resultHeadNode ListNode
+	currentNode := resultHeadNode
 
-	for l1ListNode != nil || l2ListNode != nil {
-		if l1ListNode != nil && l2ListNode != nil {
-			summedVal := l1ListNode.Val + l2ListNode.Val
-
-			if summedVal >= 10 {
-				carry = 1
-				summedVal = summedVal - 10
-			} else {
-				carry = 0
-			}
-
-			if firstIteration {
-				resultListNode := &ListNode{Val: summedVal, Next: nil}
-				currentNode = resultListNode
-			} else if resultListNode.Next == nil {
-				resultListNode.Next = &ListNode{Val: summedVal, Next: nil}
-				currentNode = resultListNode.Next
-			} else {
-				currentNode.Next = &ListNode{Val: summedVal, Next: nil}
-			}
-		} else if l1ListNode != nil && l2ListNode == nil {
-
-		} else if l1ListNode == nil && l2ListNode != nil {
-
+	// Iterate over both linked lists using the first nodes provided
+	for {
+		// Check both of the first nodes for values
+		// Add if both exist (carry if necessary) or keep existing single value
+		// Insert each summation to the result linked list by adding a pointer to the new value
+		if l1Node.Val != 0 && l2Node.Val != 0 {
+			sum = l1Node.Val + l2Node.Val + carry
+		} else if l1Node.Val != 0 && l2Node.Val == 0 {
+			sum = l1Node.Val + carry
+		} else if l1Node.Val == 0 && l2Node.Val != 0 {
+			sum = l2Node.Val + carry
+		} else if carry > 0 {
+			sum = carry
+		} else {
+			// Break if we've reached the end
+			break
 		}
 
-		if l1ListNode.Next != nil {
-			l1ListNode = l1ListNode.Next
+		// Reset carry value after each iteration
+		carry = 0
+
+		// Reset carry for next iteration
+		if sum >= 10 {
+			sum = sum - 10
+			carry = 1
 		}
-		if l2ListNode.Next != nil {
-			l2ListNode = l2ListNode.Next
+
+		// Set list node to add to list
+		summedNode = ListNode{Val: sum, Next: nil}
+
+		// Add summed node to result list
+		if &resultHeadNode.Val == nil {
+			resultHeadNode = summedNode
+			currentNode = resultHeadNode
+		} else {
+			currentNode.Next = &summedNode
+			currentNode = summedNode
 		}
-		
-		firstIteration = false
+
+		// Move to next list nodes
+		l1Node = l1Node.Next
+		l2Node = l2Node.Next
 	}
 
-	fmt.Println(carry)
-	fmt.Println(resultListNode)
-	return resultListNode
+	// Return the result linked list
+	fmt.Println(l1Node, l2Node)
+	return &resultHeadNode
 }
 
 func main() {
@@ -79,4 +83,3 @@ func main() {
 
 	fmt.Println(addTwoNumbers(nodeC, nodeE))
 }
-
