@@ -45,25 +45,25 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 		// Set list node to add to list
 		summedNode = &ListNode{Val: sum, Next: nil}
-        fmt.Println(summedNode.Val)
+		fmt.Println(summedNode.Val)
 
-        if resultHeadNode == nil {
-            resultHeadNode = summedNode
-        } else {
-            pointer := resultHeadNode
-            for pointer.Next != nil {
-                pointer = pointer.Next
-            }
-            pointer.Next = summedNode
-        }
+		if resultHeadNode == nil {
+		    resultHeadNode = summedNode
+		} else {
+		    pointer := resultHeadNode
+		    for pointer.Next != nil {
+			pointer = pointer.Next
+		    }
+		    pointer.Next = summedNode
+		}
 
-		// Move to next list nodes
-        if l1Node != nil {
-            l1Node = l1Node.Next
-        }
-		if l2Node != nil {
-            l2Node = l2Node.Next
-        }
+			// Move to next list nodes
+		if l1Node != nil {
+		    l1Node = l1Node.Next
+		}
+			if l2Node != nil {
+		    l2Node = l2Node.Next
+		}
 	}
 
 	// Return the result linked list
