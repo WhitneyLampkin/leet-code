@@ -11,9 +11,9 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	l2Node := l2
 	sum := 0
 	carry := 0
-	var summedNode ListNode{}
-	var resultHeadNode ListNode
-	pointer := resultHeadNode
+	var summedNode *ListNode
+	var resultHeadNode *ListNode
+	//pointer := ListNode{Val: 0, Next: nil}
 
 	// Iterate over both linked lists using the first nodes provided
 	for {
@@ -22,9 +22,9 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		// Insert each summation to the result linked list by adding a pointer to the new value
 		if l1Node != nil && l2Node != nil {
 			sum = l1Node.Val + l2Node.Val + carry
-		} else if l1Node != nil && l2Node != nil {
+		} else if l1Node != nil && l2Node == nil {
 			sum = l1Node.Val + carry
-		} else if l1Node != nil && l2Node != nil {
+		} else if l1Node == nil && l2Node != nil {
 			sum = l2Node.Val + carry
 		} else if carry > 0 {
 			sum = carry
@@ -43,33 +43,28 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 
 		// Set list node to add to list
-		summedNode.Val = sum
+		summedNode = &ListNode{Val: sum, Next: nil}
+        fmt.Println(summedNode.Val)
 
-		// Add summed node to result list
-		if resultHeadNode.Val == 0 {
-			resultHeadNode = summedNode
-			pointer = resultHeadNode
-		} else if resultHeadNode.Next == nil {
-			resultHeadNode.Next = &summedNode
-			pointer = summedNode
-        	} else {
-            		fmt.Println("here")
-			pointer.Next = &summedNode
-		}
-	    
-		pointer = pointer.Next
+        if resultHeadNode == nil {
+            resultHeadNode = summedNode
+        } else {
+            pointer := resultHeadNode
+            for pointer.Next != nil {
+                pointer = pointer.Next
+            }
+            pointer.Next = summedNode
+        }
 
 		// Move to next list nodes
-		if l1Node != nil {
-		    l1Node = l1Node.Next
-		}
-		
+        if l1Node != nil {
+            l1Node = l1Node.Next
+        }
 		if l2Node != nil {
-		    l2Node = l2Node.Next
-		}
+            l2Node = l2Node.Next
+        }
 	}
 
 	// Return the result linked list
-	fmt.Println(l1Node, l2Node, resultHeadNode)
-	return &resultHeadNode
+	return resultHeadNode
 }
