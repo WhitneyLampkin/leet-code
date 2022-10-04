@@ -5,6 +5,7 @@
  *     Next *ListNode
  * }
  */
+
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     // Create variables to hold the current ListNodes, the result linked list and an indicator the carrying value
 	l1Node := l1
