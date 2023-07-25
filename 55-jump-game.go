@@ -22,6 +22,36 @@ Constraints:
 0 <= nums[i] <= 105
 */
 
+func canJump(nums []int) bool {
+    highestIndex := 0
+
+    // Iterate through each item in the slice
+    for idx, val := range nums {
+        // Is the length of the slice 1?
+        if len(nums) == 1 || idx == len(nums) - 1 {
+            return true
+        } else if val > 0 && idx < len(nums) - 1 { 
+            // Set highest possible index
+            if (idx + nums[idx]) > highestIndex {
+                highestIndex = idx + nums[idx]
+            }
+            // Do I have possible jumps?
+            // Iterate through the possible jumps
+            for i := 1; i <= nums[idx]; i++ {
+                // Do I reach the end of the slice?
+                if (idx + i) >= len(nums) - 1 {
+                    return true
+                }
+            }
+        } else if val == 0 && idx < len(nums) - 1 && highestIndex <= idx  {
+            // If no possible jumps and we're not at the end of the slice
+            return false
+        }
+    }
+
+    return false
+}
+
 /*
 func canJump(nums []int) bool {
     isPossible := true
