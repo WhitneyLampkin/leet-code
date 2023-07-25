@@ -22,6 +22,26 @@ There are no two adjacent flowers in flowerbed.
 0 <= n <= flowerbed.length
 */
 
+// Better Performance
+func canPlaceFlowersOptimized(flowerbed []int, n int) bool {
+    planted := 0
+
+    for i, _ := range flowerbed {
+        if flowerbed[i] == 0 {
+            emptyLeftPlot := (i == 0 ) || (flowerbed[i - 1] == 0)
+            emptyRightPlot := (i == len(flowerbed) - 1) || (flowerbed[i + 1] == 0)
+
+            if emptyLeftPlot && emptyRightPlot {
+                flowerbed[i] = 1
+                planted += 1
+            }
+        }
+    }
+
+    return int(planted) >= n
+}
+
+// My original solution
 func canPlaceFlowers(flowerbed []int, n int) bool {
     planted := 0
 
