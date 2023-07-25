@@ -45,5 +45,10 @@ func canPlaceFlowers(flowerbed []int, n int) bool {
         }
     }
 
+    // Optimizes but negatively affects the overall runtime
+    if planted >= n {
+        return true
+    }
+
     return int(planted) >= n
 }
