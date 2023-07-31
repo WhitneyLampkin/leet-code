@@ -21,3 +21,18 @@ Constraints:
 jewels and stones consist of only English letters.
 All the characters of jewels are unique.
 */
+
+func numJewelsInStones(jewels string, stones string) int {
+    matches := 0
+
+    for _, stone := range stones {
+        for _, jewel := range jewels {
+            if stone == jewel {
+                matches++
+                break
+            }
+        }
+    }
+
+    return matches
+}
