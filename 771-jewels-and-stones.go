@@ -25,6 +25,8 @@ All the characters of jewels are unique.
 func numJewelsInStones(jewels string, stones string) int {
     matches := 0
 
+    // Initially, I wanted to use a hash table (map).
+    // Seems it could improve performance but it also seemed like overkill this morning, lol.
     for _, stone := range stones {
         for _, jewel := range jewels {
             if stone == jewel {
