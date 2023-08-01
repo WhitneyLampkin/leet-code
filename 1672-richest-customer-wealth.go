@@ -34,3 +34,27 @@ n == accounts[i].length
 1 <= m, n <= 50
 1 <= accounts[i][j] <= 100
 */
+
+func maximumWealth(accounts [][]int) int {
+    // Declare variable to hold richest customer's wealth
+    maxWealth := 0
+
+    // Iterate through the multi-dimensional slice
+    for i := 0; i < len(accounts); i++ {
+        // Declare temp variable to hold an individual customer's wealth
+        customerWealth := 0
+
+        // Iterate through the inner slice to sum customer's wealth
+        for j := 0; j < len(accounts[i]); j++ {
+            customerWealth += accounts[i][j]
+        }
+
+        // If current customer's wealth is greater than the maxWealth, update maxWealth
+        if customerWealth > maxWealth {
+            maxWealth = customerWealth
+        }
+    }
+        
+    // Return maxWealth
+    return maxWealth
+}
