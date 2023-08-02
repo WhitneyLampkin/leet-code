@@ -34,3 +34,10 @@ s consists of only English letters and spaces ' '.
 There will be at least one word in s.
 */
 
+func lengthOfLastWord(s string) int {
+    trimedString := strings.Trim(s, " ")
+    splitString := strings.Split(trimedString, " ")
+    lastWord := splitString[len(splitString)-1]
+
+    return len(lastWord)
+}
