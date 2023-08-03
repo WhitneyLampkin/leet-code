@@ -28,6 +28,17 @@ Constraints:
 */
 
 func isStrictlyPalindromic(n int) bool {
+    return false
+}
+
+
+/*
+I completed another palindromic challenege today and realized that my logic here is flawed.
+That made me wonder why it still passes. 
+The truth is that it will always be false no matter what.
+I actually saw this in the solutions but thought people were trolling.
+
+func isStrictlyPalindromic(n int) bool {
     // Iterate, i, from 2 to (n - 2)
     for i := 2; i <= n - 2; i++ {
         // Convert the number, n, to base i
@@ -48,3 +59,4 @@ func isStrictlyPalindromic(n int) bool {
     // Return true as default
     return true
 }
+*/
