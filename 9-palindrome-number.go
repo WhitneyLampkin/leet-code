@@ -34,3 +34,20 @@ Constraints:
 
 Follow up: Could you solve it without converting the integer to a string?
 */
+
+func isPalindrome(x int) bool {
+    convertedInt := strconv.FormatInt(int64(x), 10)
+
+    // Check if palindromic
+        // Yes - continue
+        // No - return false
+    for i := 0; i < int(math.Floor(float64(len(convertedInt)/2))); i++ {
+        j := len(convertedInt) - (i + 1)
+        
+        if convertedInt[i] != convertedInt[j] {
+            return false
+        }
+    }
+
+    return true
+}
