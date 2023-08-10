@@ -33,6 +33,81 @@ Constraints:
 s consists of parentheses only '()[]{}'.
 */
 
+func isValid(s string) bool {
+    var openBrackets []rune
+    hasOpenParenthesis := 0
+    hasOpenBracket := 0
+    hasOpenCurlyBrace := 0
+    result := true
+
+    if len(s) % 2 != 0 {
+        return false
+    } else if len(s) == 0 {
+        return true
+    }
+
+    for _, value := range s {
+        if value == '(' || value == '[' || value == '{' {
+            openBrackets = append(openBrackets, value)
+
+            switch value {
+                case '(':
+                    hasOpenParenthesis++
+                case '[':
+                    hasOpenBracket++
+                case '{': 
+                    hasOpenCurlyBrace++
+                default:
+                    break
+            }
+        } else {
+            if len(openBrackets) == 0 {
+                return false
+            }
+
+            lastValue := openBrackets[0]
+            lastIdx := len(openBrackets) - 1
+
+            if lastIdx >= 0 {
+                lastValue = openBrackets[lastIdx]
+            }
+            
+
+            switch value {
+                case ')':
+                    if lastValue != '(' {
+                        return false
+                    } else {
+                        openBrackets = openBrackets[:len(openBrackets)-1]
+                        hasOpenParenthesis--
+                    }
+                case ']':
+                    if lastValue != '[' {
+                        return false
+                    } else {
+                        openBrackets = openBrackets[:len(openBrackets)-1]
+                        hasOpenBracket--
+                    }
+                case '}':
+                    if lastValue != '{' {
+                        return false
+                    } else {
+                        openBrackets = openBrackets[:len(openBrackets)-1]
+                        hasOpenCurlyBrace--
+                    }
+                default:
+                    break
+            }
+        }
+    }
+
+    if hasOpenParenthesis > 0 || hasOpenBracket > 0 || hasOpenCurlyBrace > 0 {
+        result = false
+    }
+
+    return result
+}
+
 // Original solution
 /*
 hasOpenParenthesis := false
