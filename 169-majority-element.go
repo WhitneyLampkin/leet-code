@@ -26,3 +26,22 @@ n == nums.length
 
 Follow-up: Could you solve the problem in linear time and in O(1) space?
 */
+
+func majorityElement(nums []int) int {
+    maxValue := 0
+    maxKey := nums[0]
+    dict := make(map[int]int)
+
+    for _, val := range nums {
+        dict[val] = dict[val] + 1
+    }
+
+    for key, val := range dict {
+        if val > maxValue {
+            maxValue = val
+            maxKey = key
+        }
+    }
+
+    return maxKey
+}
